@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 600px;
+      padding: 20px;
+      font-family: -apple-system, system-ui, sans-serif;
+      margin: 0 auto;
+      background: #0B1C2D;
+      color: #CFCBC3;
+    }
+    h2 {
+      margin: 0 0 20px 0;
+      font-size: 18px;
+      color: #C49A6C;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #152F46;
+      border-radius: 4px;
+      background: #152F46;
+    }
+    .section h3 {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      color: #C49A6C;
+    }
+    .field {
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      color: #9A968E;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #152F46;
+      border-radius: 4px;
+      font-size: 13px;
+      box-sizing: border-box;
+      font-family: monospace;
+      background: #0B1C2D;
+      color: #CFCBC3;
+    }
+    input:focus {
+      outline: none;
+      border-color: #C49A6C;
+    }
+    .help {
+      font-size: 11px;
+      color: #9A968E;
+      margin-top: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+      background: #C49A6C;
+      color: white;
+    }
+    button:hover {
+      background: #D7B07E;
+    }
+    .status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+      background: #152F46;
+      color: #D7B07E;
+      border: 1px solid #152F46;
+    }
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+  <h2>Configuration Trackers</h2>
+  
+  <div class="section">
+    <h3>Sharewood</h3>
+    <div class="field">
+      <label>Passkey</label>
+      <input type="text" id="sharewoodPasskey" placeholder="Votre passkey Sharewood">
+      <div class="help">Trouvez votre passkey dans votre profil sur sharewood.tv</div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h3>La Cale (avec FlareSolverr)</h3>
+    <div class="field">
+      <label>Passkey</label>
+      <input type="text" id="lacalePasskey" placeholder="Votre passkey La Cale">
+      <div class="help">Trouvez votre passkey dans votre profil sur la-cale.space</div>
+    </div>
+    <div class="field">
+      <label>URL FlareSolverr</label>
+      <input type="text" id="flaresolverrUrl" placeholder="http://localhost:8191/v1">
+      <div class="help">FlareSolverr doit être lancé : <code>flaresolverr</code></div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h3>Trackers Publics</h3>
+    <p style="font-size: 12px; color: #9A968E; margin: 0;">
+      Nyaa (public)<br>
+      YggAPI (public)<br>
+      Aucune configuration requise
+    </p>
+  </div>
+  
+  <button id="saveBtn">Enregistrer</button>
+  
+  <div class="status" id="status"></div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
