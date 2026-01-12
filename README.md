@@ -1,5 +1,5 @@
 # La Vigie (LC)
-**Version 1.0.0**
+**Version 1.0.2**
 
 La Vigie détecte automatiquement les informations d'un torrent depuis les posts La Cale (titre et taille) et effectue une recherche simultanée sur plusieurs trackers.
 
