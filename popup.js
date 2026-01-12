@@ -133,12 +133,13 @@ function showStatus(message, type) {
 function extractPageInfo() {
   let originalTitle = document.querySelector('h1')?.textContent.trim() || '';
   let title = originalTitle;
-  
   const yearPattern = /[\s\.\(]\d{4}[\)\s\.]?/;
   const match = title.match(yearPattern);
   if (match) {
     title = title.substring(0, match.index).trim();
   }
+
+  title = title.replace(/\./g, ' ');
   
   const sizeSpan = document.querySelector('span.text-text-primary-medium.font-mono');
   let size = '';
