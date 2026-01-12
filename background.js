@@ -35,8 +35,7 @@ async function performSearch(title, size) {
   const config = await chrome.storage.sync.get([
     'yggPasskey',
     'sharewoodPasskey',
-    'lacalePasskey',
-    'flaresolverrUrl'
+    'lacalePasskey'
   ]);
   
   const results = {};
@@ -69,10 +68,10 @@ async function performSearch(title, size) {
     }
   }
   
-  if (config.lacalePasskey && config.flaresolverrUrl) {
+  if (config.lacalePasskey) {
     try {
       results['La Cale'] = {
-        results: await searchLaCale(title, size, config.lacalePasskey, config.flaresolverrUrl)
+        results: await searchLaCale(title, size, config.lacalePasskey)
       };
     } catch (error) {
       results['La Cale'] = { error: error.message };

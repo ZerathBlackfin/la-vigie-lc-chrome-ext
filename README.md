@@ -7,7 +7,7 @@ La Vigie détecte automatiquement les informations d'un torrent depuis les posts
 - **Nyaa** - Anime et Manga (public)
 - **YggAPI** - Général (public, API non-officielle)
 - **Sharewood** - Général (privé, nécessite passkey)
-- **La Cale** - Général (privé, nécessite passkey + FlareSolverr)
+- **La Cale** - Général (privé, nécessite passkey)
 
 ## Installation
 1. Ouvrir un nouvel onglet dans un chromium (Chome, Opera, Vivaldi, etc.) et aller sur `chrome://extensions/`.
@@ -17,4 +17,4 @@ La Vigie détecte automatiquement les informations d'un torrent depuis les posts
 ## Configuration
 Pour certains trackers privés, un parametrage est nécessaire:
 - **Sharewood**: Passkey
-- **La Cale**: Passkey + URL FlareSolverr
+- **La Cale**: Passkey

@@ -40,12 +40,12 @@ document.getElementById('checkBtn').addEventListener('click', async () => {
   const minSize = Math.max(0, sizeBytes - tolerance);
   const maxSize = sizeBytes + tolerance;
   
-  const config = await chrome.storage.sync.get(['sharewoodPasskey', 'lacalePasskey', 'flaresolverrUrl']);
-  
+  const config = await chrome.storage.sync.get(['sharewoodPasskey', 'lacalePasskey']);
+
   const searches = [
     Trackers.searchYggAPI(title, minSize, maxSize),
     Trackers.searchSharewood(title, minSize, maxSize, config.sharewoodPasskey),
-    Trackers.searchLaCale(title, minSize, maxSize, config.lacalePasskey, config.flaresolverrUrl),
+    Trackers.searchLaCale(title, minSize, maxSize, config.lacalePasskey),
     Trackers.searchNyaa(title, minSize, maxSize)
   ];
   

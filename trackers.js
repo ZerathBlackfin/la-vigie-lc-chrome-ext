@@ -137,63 +137,22 @@ window.Trackers = {
     }
   },
 
-  async searchLaCale(title, minSize, maxSize, passkey, flaresolverrUrl) {
+  async searchLaCale(title, minSize, maxSize, passkey) {
     if (!passkey) {
       return { error: 'Passkey manquante (voir Config)' };
     }
-    if (!flaresolverrUrl) {
-      return { error: 'FlareSolverr non configuré' };
-    }
-    
+
     try {
-      const healthCheck = await fetch(flaresolverrUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cmd: 'sessions.list' })
-      });
-      
-      if (!healthCheck.ok) {
-        return { error: 'FlareSolverr non accessible' };
-      }
-      
-      const solveResponse = await fetch(flaresolverrUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          cmd: 'request.get',
-          url: 'https://la-cale.space',
-          maxTimeout: 60000
-        })
-      });
-      
-      if (!solveResponse.ok) {
-        return { error: 'Cloudflare non résolu' };
-      }
-      
-      const solveData = await solveResponse.json();
-      const solution = solveData.solution || {};
-      const cookies = solution.cookies || [];
-      const userAgent = solution.userAgent || 'Mozilla/5.0';
-      
-      const cookieHeader = cookies.map(c => `${c.name}=${c.value}`).join('; ');
-      
       const apiUrl = `https://la-cale.space/api/external?passkey=${passkey}&q=${encodeURIComponent(title)}`;
-      const apiResponse = await fetch(apiUrl, {
-        headers: {
-          'User-Agent': userAgent,
-          'Cookie': cookieHeader,
-          'Accept': 'application/json',
-          'Referer': 'https://la-cale.space/'
-        }
-      });
-      
+      const apiResponse = await fetch(apiUrl);
+
       if (!apiResponse.ok) {
         if (apiResponse.status === 403) {
-          return { error: 'Cloudflare bloque (403)' };
+          return { error: 'Accès refusé (vérifier passkey)' };
         }
         return { error: `HTTP ${apiResponse.status}` };
       }
-      
+
       const data = await apiResponse.json();
       const torrents = Array.isArray(data) ? data : data.torrents || [];
       
