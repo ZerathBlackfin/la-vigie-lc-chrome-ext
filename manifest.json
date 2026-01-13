@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "La Vigie (LC)",
-  "version": "1.0",
+  "version": "1.0.3",
   "description": "Recherche multi-trackers depuis les posts La Cale",
   "permissions": ["activeTab", "scripting", "storage"],
   "background": {
@@ -11,7 +11,7 @@
     "https://nyaa.si/*",
     "https://yggapi.eu/*",
     "https://www.sharewood.tv/*",
-    "http://localhost:8191/*"
+    "https://la-cale.space/*"
   ],
   "action": {
     "default_popup": "popup.html",

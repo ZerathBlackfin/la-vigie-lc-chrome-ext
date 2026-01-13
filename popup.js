@@ -94,12 +94,13 @@ function displayResults(data) {
       totalResults += torrents.length;
       let items = '';
       torrents.forEach(t => {
+        const hasUrl = t.url && t.url !== '';
         items += `<div class="torrent-item">
           <div class="torrent-info">
             <div class="torrent-title">${t.title}</div>
             <div class="torrent-meta">${t.size_str} | S:${t.seeders} L:${t.leechers} | ${t.category}</div>
           </div>
-          <a class="torrent-btn" href="${t.url || t.magnet || '#'}" target="_blank" title="Ouvrir sur le tracker">↗</a>
+          ${hasUrl ? `<a class="torrent-btn" href="${t.url}" target="_blank" title="Ouvrir sur le tracker">↗</a>` : ''}
         </div>`;
       });
       resultsDiv.innerHTML += `<div class="tracker-section">

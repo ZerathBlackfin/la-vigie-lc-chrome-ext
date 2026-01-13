@@ -78,6 +78,7 @@ window.Trackers = {
             leechers: item.leechers || 0,
             category: item.category || 'N/A',
             magnet: item.link || '',
+            url: item.link || '',
             tracker: 'YggAPI'
           });
         }
@@ -127,6 +128,7 @@ window.Trackers = {
           leechers: item.leechers || 0,
           category: this.getSharewoodCategory(item.category_id, item.subcategory_id),
           magnet: item.download_url || '',
+          url: item.slug && item.id ? `https://www.sharewood.tv/torrents/${item.slug}.${item.id}` : '',
           tracker: 'Sharewood'
         });
       }

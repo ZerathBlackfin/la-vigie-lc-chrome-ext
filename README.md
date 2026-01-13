@@ -1,5 +1,5 @@
 # La Vigie (LC)
-**Version 1.0.2**
+**Version 1.0.3**
 
 La Vigie détecte automatiquement les informations d'un torrent depuis les posts La Cale (titre et taille) et effectue une recherche simultanée sur plusieurs trackers.
 
@@ -18,3 +18,6 @@ La Vigie détecte automatiquement les informations d'un torrent depuis les posts
 Pour certains trackers privés, un parametrage est nécessaire:
 - **Sharewood**: Passkey
 - **La Cale**: Passkey
+
+## Problèmes connus
+- La Cale ne permet pas d'acceder directement au torrent via le bouton.
