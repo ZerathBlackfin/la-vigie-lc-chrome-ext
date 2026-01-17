@@ -102,7 +102,7 @@ window.Trackers = {
       
       if (!response.ok) {
         if (response.status === 403) {
-          return { error: 'Accès refusé (vérifier passkey)' };
+          return { error: 'HTTP 403' };
         }
         return { error: `HTTP ${response.status}` };
       }
@@ -150,7 +150,7 @@ window.Trackers = {
 
       if (!apiResponse.ok) {
         if (apiResponse.status === 403) {
-          return { error: 'Accès refusé (vérifier passkey)' };
+          return { error: 'HTTP 403' };
         }
         return { error: `HTTP ${apiResponse.status}` };
       }
