@@ -60,9 +60,7 @@
     },
     async searchLaCale(title, minSize, maxSize, passkey) {
       return TrackerRegistry.searchTracker('lacale', title, minSize, maxSize, passkey);
-    },
-    parseSize: (str) => TrackerUtils.parseSize(str),
-    formatSize: (bytes) => TrackerUtils.formatSize(bytes)
+    }
   };
 
 })(typeof window !== 'undefined' ? window : self);
