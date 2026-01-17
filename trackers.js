@@ -242,5 +242,80 @@ window.Trackers = {
     }
     
     return 'N/A';
+  },
+
+  async searchAbnormal(title, credentials) {
+    if (!credentials || !credentials.username || !credentials.password) {
+      return { error: 'Identifiants manquants (voir Config)' };
+    }
+
+    try {
+      const loginResponse = await fetch('https://api.abn.lol/api/Account/Login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: credentials.username,
+          password: credentials.password
+        })
+      });
+
+      if (!loginResponse.ok) {
+        if (loginResponse.status === 401) {
+          return { error: 'Identifiants invalides' };
+        }
+        return { error: `Login HTTP ${loginResponse.status}` };
+      }
+
+      const loginData = await loginResponse.json();
+      const token = loginData.token || loginData.accessToken;
+
+      if (!token) {
+        return { error: 'Token non reçu' };
+      }
+
+      const searchResponse = await fetch(
+        `https://api.abn.lol/api/Release/GetByName?name=${encodeURIComponent(title)}`,
+        { headers: { 'Authorization': `Bearer ${token}` } }
+      );
+
+      if (!searchResponse.ok) {
+        if (searchResponse.status === 401) {
+          return { error: 'Token invalide' };
+        }
+        return { error: `Search HTTP ${searchResponse.status}` };
+      }
+
+      const data = await searchResponse.json();
+      const releases = Array.isArray(data) ? data : [data].filter(Boolean);
+
+      const results = [];
+      for (const item of releases) {
+        if (!item || !item.name) continue;
+
+        results.push({
+          title: item.name,
+          size: 0,
+          size_str: 'N/A',
+          seeders: 0,
+          leechers: 0,
+          category: this.getAbnormalCategory(item.categoryId),
+          freeleech: item.freeleech || false,
+          url: item.groupId ? `https://abnormal.ws/Group/Details?GroupId=${item.groupId}` : '',
+          tracker: 'Abnormal'
+        });
+      }
+
+      return results;
+    } catch (error) {
+      return { error: error.message };
+    }
+  },
+
+  getAbnormalCategory(categoryId) {
+    const categories = {
+      1: 'Film', 2: 'Série', 3: 'Documentaire', 4: 'Émission',
+      5: 'Anime', 6: 'Jeu', 7: 'Musique', 8: 'Ebook', 9: 'Application'
+    };
+    return categories[categoryId] || 'N/A';
   }
 };

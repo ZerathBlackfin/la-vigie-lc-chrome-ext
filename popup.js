@@ -40,23 +40,29 @@ document.getElementById('checkBtn').addEventListener('click', async () => {
   const minSize = Math.max(0, sizeBytes - tolerance);
   const maxSize = sizeBytes + tolerance;
   
-  const config = await chrome.storage.sync.get(['sharewoodPasskey', 'lacalePasskey']);
+  const config = await chrome.storage.sync.get(['sharewoodPasskey', 'lacalePasskey', 'abnormalUsername', 'abnormalPassword']);
+
+  const abnormalCredentials = config.abnormalUsername && config.abnormalPassword
+    ? { username: config.abnormalUsername, password: config.abnormalPassword }
+    : null;
 
   const searches = [
     Trackers.searchYggAPI(title, minSize, maxSize),
     Trackers.searchSharewood(title, minSize, maxSize, config.sharewoodPasskey),
     Trackers.searchLaCale(title, minSize, maxSize, config.lacalePasskey),
-    Trackers.searchNyaa(title, minSize, maxSize)
+    Trackers.searchNyaa(title, minSize, maxSize),
+    Trackers.searchAbnormal(title, abnormalCredentials)
   ];
-  
+
   try {
     const results = await Promise.all(searches);
-    
+
     const data = {
       'YggAPI': results[0],
       'Sharewood': results[1],
       'La Cale': results[2],
-      'Nyaa': results[3]
+      'Nyaa': results[3],
+      'Abnormal': results[4]
     };
     
     displayResults(data);

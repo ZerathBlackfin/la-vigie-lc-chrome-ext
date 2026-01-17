@@ -11,7 +11,8 @@
     "https://nyaa.si/*",
     "https://yggapi.eu/*",
     "https://www.sharewood.tv/*",
-    "https://la-cale.space/*"
+    "https://la-cale.space/*",
+    "https://api.abn.lol/*"
   ],
   "action": {
     "default_popup": "popup.html",
